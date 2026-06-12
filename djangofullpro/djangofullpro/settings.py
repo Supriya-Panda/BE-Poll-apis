@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,12 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', default=False, cast=bool)
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS=[
-"pollapi.com",
-"www.pollapi.com",
-"EC2_PUBLIC_IP"
+"13.234.30.244"
 ]
 
 # Application definition
@@ -81,7 +82,7 @@ WSGI_APPLICATION = 'djangofullpro.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-ATABASES = {
+DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.getenv("DB_NAME"),
@@ -127,9 +128,9 @@ REST_FRAMEWORK = {
     }
 }
 
-SECURE_SSL_REDIRECT=True
-SESSION_COOKIE_SECURE=True
-CSRF_COOKIE_SECURE=True
+SECURE_SSL_REDIRECT=False
+SESSION_COOKIE_SECURE=False
+CSRF_COOKIE_SECURE=False
 SECURE_BROWSER_XSS_FILTER=True
 SECURE_CONTENT_TYPE_NOSNIFF=True
 X_FRAME_OPTIONS="DENY"
